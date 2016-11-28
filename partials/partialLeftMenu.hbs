@@ -1,0 +1,57 @@
+<ul class="nav metismenu" id="side-menu">
+	<li class="nav-header">
+		<div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="/img/avatar.png" />
+                             </span>
+			<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+				<span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{_authUserName}}</strong>
+                             </span> <span class="text-muted text-xs block">{{_authUserRole}} <b class="caret"></b></span>				</span>
+			</a>
+			<ul class="dropdown-menu animated fadeInRight m-t-xs">
+				<li><a href="/account/logout" title="Logout"><span class="fa fa-sign-out"></span> {{__ 'LOGOUT'}}</a></li>
+			</ul>
+		</div>
+		<div class="logo-element">
+			<span class="fa fa-home"></span>
+		</div>
+	</li>
+	{{#existsRole this 'bos'}} {{#existsRole this 'update'}}
+	<li data-menu="_dashboard">
+		<a href="/"><i class="fa fa-th-large"></i> <span class="nav-label">Overview</span></a>
+	</li>
+	{{/existsRole}} {{#existsRole this 'dealerman'}}
+	<li data-menu="_dealerman">
+		<a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">Dealer Manage</span><span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level collapse">
+			<li data-menu="_dealerman_status"><a href="/dealerman/status">Dealer Status</a></li>
+		</ul>
+	</li>
+	{{/existsRole}} {{#existsRole this 'code'}}
+	<li data-menu="_code">
+		<a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">System Code</span><span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level collapse">
+			<li data-menu="_code_list"><a href="/code/list">Code List</a></li>
+			<li data-menu="_code_add"><a href="/code/add">Add Code</a></li>
+		</ul>
+	</li>
+	{{/existsRole}} {{/existsRole}}
+</ul>
+
+<script type="text/javascript">
+    (function () {
+        var target = '{{url}}'.replaceAll('/', '_').toLowerCase();
+		if (target == "_") {target = "_dashboard";}
+		else {
+			var tmp=target.split('_');
+			if(tmp.length>1) {
+				while(tmp.length>1) {
+					var t=tmp.join('_');
+			        $('.metismenu li[data-menu="' + t + '"]').addClass("active");
+					tmp.pop();
+				}
+				return;
+			}
+		}		
+		$('.metismenu li[data-menu="' + target + '"]').addClass("active");
+    })();
+</script>
