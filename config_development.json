@@ -1,0 +1,15 @@
+{
+    "bindport": 8080,
+    "locales": [
+        "en"
+    ],
+    "maindb": "Data Source=localhost,1433;Initial Catalog=USER;User ID=user;Password=user!2016",
+    "session": {
+        "key": "USER",
+        "secret": "abcdefg"
+    },
+    "redis": {
+        "host": "127.0.0.1",
+        "port": 6379
+    }
+}

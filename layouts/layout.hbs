@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>{{title}}</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+	<link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="/css/animate.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="/js/common.js"></script>
+</head>
+
+<body>
+	<div id="wrapper">
+		<nav class="navbar-default navbar-static-side" role="navigation">
+			<div class="sidebar-collapse">
+				{{> partialLeftMenu}}
+			</div>
+		</nav>
+		<div id="page-wrapper" class="gray-bg">
+			{{> partialTop}}
+			<!-- MAIN CONTENT -->
+			{{{body}}}
+			<!-- END MAIN CONTENT -->
+			<div class="footer">
+				<div class="pull-right">
+				</div>
+				<div>
+					<strong>Copyright</strong> TEST &copy; 2016
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script type = "text/javascript">
+		$(function () {
+			// sidebar fixed
+			$("body").addClass('fixed-sidebar');
+			$('.sidebar-collapse').slimScroll({
+				height: '100%',
+				railOpacity: 0.9
+			});
+            $(".navbar-static-top").removeClass('navbar-static-top').addClass('navbar-fixed-top');
+            $("body").addClass('fixed-nav').addClass('fixed-nav-basic');
+
+			// Add body-small class if window less than 768px
+			if ($(this).width() < 769) {
+				$('body').addClass('body-small')
+			} else {
+				$('body').removeClass('body-small')
+			}
+
+			// MetsiMenu
+			$('#side-menu').metisMenu();
+
+			// Minimalize menu
+			$('.navbar-minimalize').on('click', function () {
+				$("body").toggleClass("mini-navbar");
+				//        SmoothlyMenu();
+			});
+
+			function SmoothlyMenu() {
+				if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
+					// Hide menu in order to smoothly turn on when maximize menu
+					$('#side-menu').hide();
+					// For smoothly turn on menu
+					setTimeout(
+						function () {
+							$('#side-menu').fadeIn(400);
+						}, 200);
+				} else if ($('body').hasClass('fixed-sidebar')) {
+					$('#side-menu').hide();
+					setTimeout(
+						function () {
+							$('#side-menu').fadeIn(400);
+						}, 100);
+				} else {
+					// Remove all inline style from jquery fadeIn function to reset menu state
+					$('#side-menu').removeAttr('style');
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>

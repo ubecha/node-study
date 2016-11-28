@@ -1,0 +1,16 @@
+<div class="row border-bottom">
+	<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+		<div class="navbar-header">
+			<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+		</div>
+		<ul class="nav navbar-top-links navbar-right">
+			<li><a href="/" title="Home"><span class="fa fa-home"></span> Home</a></li>
+			{{#if _isAuthed}}
+			<li><a href="/account/logout" title="Logout"><span class="fa fa-sign-out"></span> {{__ 'LOGOUT'}}</a></li>
+			{{else}}
+			<li><a href="/account/login" title="Signin"><span class="fa fa-sign-in"></span> {{__ 'SIGNIN'}}</a></li>
+			{{/if}}
+		</ul>
+
+	</nav>
+</div>

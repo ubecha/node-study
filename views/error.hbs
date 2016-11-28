@@ -1,0 +1,10 @@
+<div class="middle-box text-center animated fadeInDown">
+    <h1>{{error.status}}</h1>
+    <h3 class="font-bold">{{message}}</h3>
+    <div class="error-desc">
+        {{#if error.stack}}
+        <pre>{{error.stack}}</pre>{{else}}Oooops!! Sorry~, Can you try again?{{/if}}
+    </div>
+    {{#if refer}}<a class="btn btn-default" href="{{refer}}">BACK</a>{{/if}}
+    <a class="btn btn-default" href="/">HOME</a>
+</div>

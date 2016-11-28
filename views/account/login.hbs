@@ -1,0 +1,67 @@
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <div>
+            <h1 class="logo-name">TEST</h1>
+        </div>
+        <h3>TEST</h3>
+        {{#if err}}
+        <div class="alert alert-danger">
+            {{err}}
+        </div>
+        {{/if}}
+        <form action="/account/login" id="login-form" method="post" class="m-t" role="form">
+            <input type="hidden" name="returnUrl" value="{{returnUrl}}" />
+
+            <div class="form-group">
+                <input type="text" name="accountid" class="form-control" placeholder="{{__ 'SIGNINIDHOLDER'}}" value="{{accountid}}" autofocus/>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="{{__ 'SIGNINPWHOLDER'}}" />
+            </div>
+
+            <button class="btn btn-primary block full-width m-b btn-signin" type="submit ">{{__ 'SIGNIN'}}</button>
+        </form>
+        <p class="m-t"> <small>TEST &copy; 2016</small> </p>
+    </div>
+</div>
+
+<script type="text/javascript ">
+    $(function () {
+        // Validation
+        $("#login-form").validate({
+            rules: {
+                accountid: {
+                    required: true
+                },
+                password: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 255
+                }
+            },
+            messages: {
+                accountid: {
+                    required: '{{__ 'SIGNINIDHOLDER'}}'
+                },
+                password: {
+                    required: '{{__ 'SIGNINPWHOLDER'}}'
+                }
+            },
+			showErrors: function(errorMap, errorList) {
+	      		$.each(this.validElements(), function (index, element) {
+          			var $element = $(element);
+          			$element.data("content", "").removeClass("error").popover("destroy");
+				});
+
+				$.each(errorList, function (index, error) {
+        			var $element = $(error.element);
+                    $element.popover("destroy").data("placement","auto bottom").data("content", error.message).addClass("error").popover("show");
+				});
+			},
+            submitHandler: function (form) {
+                $('#login-form button.btn-signin').prop('disabled', true);
+                form.submit();
+            }
+        });
+    });
+</script>
